@@ -13,6 +13,8 @@ def build_random_function(min_depth, max_depth):
 	function = [] # put random functions in here
 	depth = random.randint(min_depth,max_depth)
 	x = depth
+	# what is the purpose of renaming the depth variable to 'x'?
+
 	# functions are chosen in below two lists 
 	building_block = [["prod",'a','b'],["cos_pi",'a'],["sin_pi",'a']] 
 	simple_block = [['x'],['y']] 
@@ -48,6 +50,8 @@ def evaluate_random_function(f,x,y):
 	x1 = float(x)
 	y1 = float(y)
 	a = f 
+	# again, there's no need to rename your variabbles from f to a for example
+
 	if len(a)==3: # if a[0]="prod"
 		if len(a[1])>1: # if a[1] is nested list
 			one = float(evaluate_random_function(a[1],x1,y1)) # use recursion
@@ -70,6 +74,9 @@ def evaluate_random_function(f,x,y):
 				return float(math.sin(math.pi*one))
 			else:
 				return float(math.cos(math.pi*float(one)))
+		
+		# this shouldn't be necessary - your recursion accounts for this possibility already
+		# and it would do the same thing without this check
 		if len(a[1])==1: # if a[1] is ['x'] or ['y']
 			if a[0]=='sin_pi' and a[1]==['x']:
 				return float(math.sin(math.pi*x1))
@@ -97,6 +104,8 @@ def remap_interval(val,input_interval_start,input_interval_end,output_interval_s
 	c= float(input_interval_end)
 	d = float(output_interval_start)
 	e = float(output_interval_end)
+	# no need to rename descriptive variable names to harder-to-interpret ones
+
 	# (output_interval_end - output_interval_start) * (value - input_interval_start) / (input_interval_end - input_interval_start) + output_interval_start
 	# shape of y = ax + b
 	f = float((e - d) * (val - b) / (c - b) + d)
@@ -131,5 +140,6 @@ def drawing(min_depth,max_depth,x,y):
 			
 	im.save('soeun_pattern.png') # save image with name 'soeun_pattern'
 
+# this should be within a if __name__ == "__main__" statement
 drawing(4,15,350,350) # execuate function
 
