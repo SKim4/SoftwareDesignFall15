@@ -94,7 +94,6 @@ class RythemgameWindowView:
 
     def first(self,number):
         self.screen.fill(pygame.Color(0,0,0))
-        #nightsky3 = pygame.image.load("nightsky3.jpg")
         font = pygame.font.SysFont("None",150)
         textsurface = font.render(number, True, (255,170,0))
         textRect = textsurface.get_rect()
