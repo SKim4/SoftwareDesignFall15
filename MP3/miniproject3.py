@@ -1,7 +1,8 @@
 import pygame
 from pygame.locals import *
 
-
+#^^ if this file were to be split up into ,py files for the model, view, and
+#controller, you could import the other files here to be more modular.
 
 
 class RythemgameModel:
@@ -14,7 +15,8 @@ class RythemgameModel:
         self.brickx = [5,100,195,290,385] # brick1s to brick5s is in these x coordinates
         self.brickcolor = [(50,60,130),(150,215,230),(255,175,200),(255,255,130),(180,230,30)] # brick1s to brick5s have colors in these orders.
 
-
+#more of your code could have been factored into the model class.
+#for examples, see the comments in the View class below.
 
 
 class RythemgameWindowView:
@@ -59,7 +61,10 @@ class RythemgameWindowView:
             view.movingbrick(model.brickcolor[4],model.brickx[4],model.bricky5[i]+dy)
             
 
-
+#^^ moving the bricks is a part of the view controller that could be
+#considered for the controller class - leaving the view class to pull
+#the latest location to draw.
+#The code above also seems like it could be handled with fewer lines that look very similar.
 
     # put brick on (x,y) coordinate with color
     def movingbrick(self,color,x,y):
@@ -108,7 +113,7 @@ class RythemgameController:
 
     def handle_keyboard_event(self,event):
         if event.type == pygame.KEYDOWN:
-            global score
+            global score #score could be a part of the model.
             if event.key == pygame.K_f:
                 for i in range(len(model.bricky1)): # for all brick1s in model class, if player put f button when moving bricks are near the bottom bricks, give score +10
                     if y2-level+10 <= model.bricky1[i]+dy <= y2+level:
@@ -159,6 +164,7 @@ if __name__=='__main__':
     y1 = 40 
     y2 = 580
 
+#I actually don't see y1 used often. Could y2 be a more descriptive name?
 
     width = 90 # width of all bricks
     height = 40 # height of all bricks
@@ -175,7 +181,7 @@ if __name__=='__main__':
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     
-
+#upgrade opportunity would be to make it so a user could choose music.
 
 
     while running:
@@ -197,6 +203,8 @@ if __name__=='__main__':
         milliseconds = clock.tick(FPS)
         seconds = milliseconds / 1000.0
   
+#The two lines above could be collapsed into one. The 130 below isn't clear why it is needed.
+
         # to move bricks as time passes
         dy = dy + seconds*130
         
